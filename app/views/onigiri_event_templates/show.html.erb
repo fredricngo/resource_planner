@@ -1,0 +1,141 @@
+<h1>
+  Onigiri event #<%= @the_onigiri_event.id %> details
+</h1>
+
+<article>
+  <div>
+    <a href="/onigiri_events">
+      Go back
+    </a>
+  </div>
+
+  <div>
+    <a href="/delete_onigiri_event/<%= @the_onigiri_event.id %>">
+      Delete onigiri event
+    </a>
+  </div>
+  <dl>
+    <dt>
+      Onigiri
+    </dt>
+    <dd>
+      <%= @the_onigiri_event.onigiri_id %>
+    </dd>
+
+    <dt>
+      Event
+    </dt>
+    <dd>
+      <%= @the_onigiri_event.event_id %>
+    </dd>
+
+    <dt>
+      Unit cost
+    </dt>
+    <dd>
+      <%= @the_onigiri_event.unit_cost %>
+    </dd>
+
+    <dt>
+      Unit profit
+    </dt>
+    <dd>
+      <%= @the_onigiri_event.unit_profit %>
+    </dd>
+
+    <dt>
+      Quantity brought
+    </dt>
+    <dd>
+      <%= @the_onigiri_event.quantity_brought %>
+    </dd>
+
+    <dt>
+      Quantity sold
+    </dt>
+    <dd>
+      <%= @the_onigiri_event.quantity_sold %>
+    </dd>
+
+    <dt>
+      Created at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_onigiri_event.created_at) %> ago
+    </dd>
+
+    <dt>
+      Updated at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_onigiri_event.updated_at) %> ago
+    </dd>
+  </dl>
+</article>
+
+<hr>
+
+
+<article>
+  <header>
+    <h2>
+      Edit onigiri event
+    </h2>
+  </header>
+
+  <form action="/modify_onigiri_event/<%= @the_onigiri_event.id %>"  method="post" >
+    <div>
+      <label for="onigiri_id_box">
+        Onigiri
+      </label>
+
+      <input type="text" id="onigiri_id_box" name="query_onigiri_id" value="<%= @the_onigiri_event.onigiri_id %>">
+    </div>
+
+    <div>
+      <label for="event_id_box">
+        Event
+      </label>
+
+      <input type="text" id="event_id_box" name="query_event_id" value="<%= @the_onigiri_event.event_id %>">
+    </div>
+
+    <div>
+      <label for="unit_cost_box">
+        Unit cost
+      </label>
+
+      <input type="text" id="unit_cost_box" name="query_unit_cost" value="<%= @the_onigiri_event.unit_cost %>">
+    </div>
+
+    <div>
+      <label for="unit_profit_box">
+        Unit profit
+      </label>
+
+      <input type="text" id="unit_profit_box" name="query_unit_profit" value="<%= @the_onigiri_event.unit_profit %>">
+    </div>
+
+    <div>
+      <label for="quantity_brought_box">
+        Quantity brought
+      </label>
+
+      <input type="text" id="quantity_brought_box" name="query_quantity_brought" value="<%= @the_onigiri_event.quantity_brought %>">
+    </div>
+
+    <div>
+      <label for="quantity_sold_box">
+        Quantity sold
+      </label>
+
+      <input type="text" id="quantity_sold_box" name="query_quantity_sold" value="<%= @the_onigiri_event.quantity_sold %>">
+    </div>
+
+    <button type="submit">
+      Update onigiri event
+    </button>
+  </form>
+</article>
+
+<hr>

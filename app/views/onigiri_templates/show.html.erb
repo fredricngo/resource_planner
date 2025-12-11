@@ -1,0 +1,66 @@
+<h1>
+  Onigiri #<%= @the_onigiri.id %> details
+</h1>
+
+<article>
+  <div>
+    <a href="/onigiris">
+      Go back
+    </a>
+  </div>
+
+  <div>
+    <a href="/delete_onigiri/<%= @the_onigiri.id %>">
+      Delete onigiri
+    </a>
+  </div>
+  <dl>
+    <dt>
+      Onigiri flavor
+    </dt>
+    <dd>
+      <%= @the_onigiri.onigiri_flavor %>
+    </dd>
+
+    <dt>
+      Created at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_onigiri.created_at) %> ago
+    </dd>
+
+    <dt>
+      Updated at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_onigiri.updated_at) %> ago
+    </dd>
+  </dl>
+</article>
+
+<hr>
+
+
+<article>
+  <header>
+    <h2>
+      Edit onigiri
+    </h2>
+  </header>
+
+  <form action="/modify_onigiri/<%= @the_onigiri.id %>"  method="post" >
+    <div>
+      <label for="onigiri_flavor_box">
+        Onigiri flavor
+      </label>
+
+      <input type="text" id="onigiri_flavor_box" name="query_onigiri_flavor" value="<%= @the_onigiri.onigiri_flavor %>">
+    </div>
+
+    <button type="submit">
+      Update onigiri
+    </button>
+  </form>
+</article>
+
+<hr>

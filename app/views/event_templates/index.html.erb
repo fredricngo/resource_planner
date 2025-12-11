@@ -1,0 +1,107 @@
+<h1>
+  List of all events
+</h1>
+
+<hr>
+
+<article>
+  <header>
+    <h2>
+      Add a new event
+    </h2>
+  </header>
+
+  <form action="/insert_event" method="post">
+    <div>
+      <label for="event_name_box">
+        Event name
+      </label>
+
+      <input type="text" id="event_name_box" name="query_event_name">
+    </div>
+
+    <div>
+      <label for="event_location_box">
+        Event location
+      </label>
+
+      <input type="text" id="event_location_box" name="query_event_location">
+    </div>
+
+    <div>
+      <label for="event_date_box">
+        Event date
+      </label>
+
+      <input type="datetime-local" id="event_date_box" name="query_event_date">
+    </div>
+
+    <div>
+      <label for="application_fee_box">
+        Application fee
+      </label>
+
+      <input type="text" id="application_fee_box" name="query_application_fee">
+    </div>
+
+    <div>
+      <label for="participation_fee_box">
+        Participation fee
+      </label>
+
+      <input type="text" id="participation_fee_box" name="query_participation_fee">
+    </div>
+
+    <div>
+      <label for="event_duration_box">
+        Event duration
+      </label>
+
+      <input type="text" id="event_duration_box" name="query_event_duration">
+    </div>
+
+    <div>
+      <label for="hourly_labor_box">
+        Hourly labor
+      </label>
+
+      <input type="text" id="hourly_labor_box" name="query_hourly_labor">
+    </div>
+
+    <div>
+      <label for="mile_reimbursement_box">
+        Mile reimbursement
+      </label>
+
+      <input type="text" id="mile_reimbursement_box" name="query_mile_reimbursement">
+    </div>
+
+    <div>
+      <label for="created_by_box">
+        Created by
+      </label>
+
+      <input type="text" id="created_by_box" name="query_created_by">
+    </div>
+
+    <button type="submit">
+      Create event
+    </button>
+  </form>
+</article>
+
+<hr>
+
+<article>
+  <ul>
+    <% @list_of_events.each do |an_event| %>
+      <li>
+        <a href="/events/<%= an_event.id %>">
+          Event #<%= an_event.id %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</article>
+
+<hr>

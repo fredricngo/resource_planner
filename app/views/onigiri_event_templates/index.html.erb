@@ -1,0 +1,83 @@
+<h1>
+  List of all onigiri events
+</h1>
+
+<hr>
+
+<article>
+  <header>
+    <h2>
+      Add a new onigiri event
+    </h2>
+  </header>
+
+  <form action="/insert_onigiri_event" method="post">
+    <div>
+      <label for="onigiri_id_box">
+        Onigiri
+      </label>
+
+      <input type="text" id="onigiri_id_box" name="query_onigiri_id">
+    </div>
+
+    <div>
+      <label for="event_id_box">
+        Event
+      </label>
+
+      <input type="text" id="event_id_box" name="query_event_id">
+    </div>
+
+    <div>
+      <label for="unit_cost_box">
+        Unit cost
+      </label>
+
+      <input type="text" id="unit_cost_box" name="query_unit_cost">
+    </div>
+
+    <div>
+      <label for="unit_profit_box">
+        Unit profit
+      </label>
+
+      <input type="text" id="unit_profit_box" name="query_unit_profit">
+    </div>
+
+    <div>
+      <label for="quantity_brought_box">
+        Quantity brought
+      </label>
+
+      <input type="text" id="quantity_brought_box" name="query_quantity_brought">
+    </div>
+
+    <div>
+      <label for="quantity_sold_box">
+        Quantity sold
+      </label>
+
+      <input type="text" id="quantity_sold_box" name="query_quantity_sold">
+    </div>
+
+    <button type="submit">
+      Create onigiri event
+    </button>
+  </form>
+</article>
+
+<hr>
+
+<article>
+  <ul>
+    <% @list_of_onigiri_events.each do |an_onigiri_event| %>
+      <li>
+        <a href="/onigiri_events/<%= an_onigiri_event.id %>">
+          Onigiri event #<%= an_onigiri_event.id %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</article>
+
+<hr>

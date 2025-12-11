@@ -1,0 +1,187 @@
+<h1>
+  Event #<%= @the_event.id %> details
+</h1>
+
+<article>
+  <div>
+    <a href="/events">
+      Go back
+    </a>
+  </div>
+
+  <div>
+    <a href="/delete_event/<%= @the_event.id %>">
+      Delete event
+    </a>
+  </div>
+  <dl>
+    <dt>
+      Event name
+    </dt>
+    <dd>
+      <%= @the_event.event_name %>
+    </dd>
+
+    <dt>
+      Event location
+    </dt>
+    <dd>
+      <%= @the_event.event_location %>
+    </dd>
+
+    <dt>
+      Event date
+    </dt>
+    <dd>
+      <%= @the_event.event_date %>
+    </dd>
+
+    <dt>
+      Application fee
+    </dt>
+    <dd>
+      <%= @the_event.application_fee %>
+    </dd>
+
+    <dt>
+      Participation fee
+    </dt>
+    <dd>
+      <%= @the_event.participation_fee %>
+    </dd>
+
+    <dt>
+      Event duration
+    </dt>
+    <dd>
+      <%= @the_event.event_duration %>
+    </dd>
+
+    <dt>
+      Hourly labor
+    </dt>
+    <dd>
+      <%= @the_event.hourly_labor %>
+    </dd>
+
+    <dt>
+      Mile reimbursement
+    </dt>
+    <dd>
+      <%= @the_event.mile_reimbursement %>
+    </dd>
+
+    <dt>
+      Created by
+    </dt>
+    <dd>
+      <%= @the_event.created_by %>
+    </dd>
+
+    <dt>
+      Created at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_event.created_at) %> ago
+    </dd>
+
+    <dt>
+      Updated at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_event.updated_at) %> ago
+    </dd>
+  </dl>
+</article>
+
+<hr>
+
+
+<article>
+  <header>
+    <h2>
+      Edit event
+    </h2>
+  </header>
+
+  <form action="/modify_event/<%= @the_event.id %>"  method="post" >
+    <div>
+      <label for="event_name_box">
+        Event name
+      </label>
+
+      <input type="text" id="event_name_box" name="query_event_name" value="<%= @the_event.event_name %>">
+    </div>
+
+    <div>
+      <label for="event_location_box">
+        Event location
+      </label>
+
+      <input type="text" id="event_location_box" name="query_event_location" value="<%= @the_event.event_location %>">
+    </div>
+
+    <div>
+      <label for="event_date_box">
+        Event date
+      </label>
+
+      <input type="datetime-local" id="event_date_box" name="query_event_date"
+         value="<%= @the_event.event_date %>">
+    </div>
+
+    <div>
+      <label for="application_fee_box">
+        Application fee
+      </label>
+
+      <input type="text" id="application_fee_box" name="query_application_fee" value="<%= @the_event.application_fee %>">
+    </div>
+
+    <div>
+      <label for="participation_fee_box">
+        Participation fee
+      </label>
+
+      <input type="text" id="participation_fee_box" name="query_participation_fee" value="<%= @the_event.participation_fee %>">
+    </div>
+
+    <div>
+      <label for="event_duration_box">
+        Event duration
+      </label>
+
+      <input type="text" id="event_duration_box" name="query_event_duration" value="<%= @the_event.event_duration %>">
+    </div>
+
+    <div>
+      <label for="hourly_labor_box">
+        Hourly labor
+      </label>
+
+      <input type="text" id="hourly_labor_box" name="query_hourly_labor" value="<%= @the_event.hourly_labor %>">
+    </div>
+
+    <div>
+      <label for="mile_reimbursement_box">
+        Mile reimbursement
+      </label>
+
+      <input type="text" id="mile_reimbursement_box" name="query_mile_reimbursement" value="<%= @the_event.mile_reimbursement %>">
+    </div>
+
+    <div>
+      <label for="created_by_box">
+        Created by
+      </label>
+
+      <input type="text" id="created_by_box" name="query_created_by" value="<%= @the_event.created_by %>">
+    </div>
+
+    <button type="submit">
+      Update event
+    </button>
+  </form>
+</article>
+
+<hr>

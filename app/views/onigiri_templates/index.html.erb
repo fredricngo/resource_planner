@@ -1,0 +1,43 @@
+<h1>
+  List of all onigiris
+</h1>
+
+<hr>
+
+<article>
+  <header>
+    <h2>
+      Add a new onigiri
+    </h2>
+  </header>
+
+  <form action="/insert_onigiri" method="post">
+    <div>
+      <label for="onigiri_flavor_box">
+        Onigiri flavor
+      </label>
+
+      <input type="text" id="onigiri_flavor_box" name="query_onigiri_flavor">
+    </div>
+
+    <button type="submit">
+      Create onigiri
+    </button>
+  </form>
+</article>
+
+<hr>
+
+<article>
+  <ul>
+    <% @list_of_onigiris.each do |an_onigiri| %>
+      <li>
+        <a href="/onigiris/<%= an_onigiri.id %>">
+          Onigiri #<%= an_onigiri.id %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</article>
+
+<hr>
