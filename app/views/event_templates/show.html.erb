@@ -1,187 +1,141 @@
 <h1>
-  Event #<%= @the_event.id %> details
+  <%= @the_event.event_name %>
 </h1>
 
-<article>
-  <div>
-    <a href="/events">
-      Go back
-    </a>
-  </div>
-
-  <div>
-    <a href="/delete_event/<%= @the_event.id %>">
-      Delete event
-    </a>
-  </div>
-  <dl>
-    <dt>
-      Event name
-    </dt>
-    <dd>
-      <%= @the_event.event_name %>
-    </dd>
-
-    <dt>
-      Event location
-    </dt>
-    <dd>
-      <%= @the_event.event_location %>
-    </dd>
-
-    <dt>
-      Event date
-    </dt>
-    <dd>
-      <%= @the_event.event_date %>
-    </dd>
-
-    <dt>
-      Application fee
-    </dt>
-    <dd>
-      <%= @the_event.application_fee %>
-    </dd>
-
-    <dt>
-      Participation fee
-    </dt>
-    <dd>
-      <%= @the_event.participation_fee %>
-    </dd>
-
-    <dt>
-      Event duration
-    </dt>
-    <dd>
-      <%= @the_event.event_duration %>
-    </dd>
-
-    <dt>
-      Hourly labor
-    </dt>
-    <dd>
-      <%= @the_event.hourly_labor %>
-    </dd>
-
-    <dt>
-      Mile reimbursement
-    </dt>
-    <dd>
-      <%= @the_event.mile_reimbursement %>
-    </dd>
-
-    <dt>
-      Created by
-    </dt>
-    <dd>
-      <%= @the_event.created_by %>
-    </dd>
-
-    <dt>
-      Created at
-    </dt>
-    <dd>
-      <%= time_ago_in_words(@the_event.created_at) %> ago
-    </dd>
-
-    <dt>
-      Updated at
-    </dt>
-    <dd>
-      <%= time_ago_in_words(@the_event.updated_at) %> ago
-    </dd>
-  </dl>
-</article>
+<div>
+  <a href="/events">← Back to Events</a>
+  &nbsp;|&nbsp;
+  <a href="/delete_event/<%= @the_event.id %>">Delete</a>
+</div>
 
 <hr>
 
-
-<article>
-  <header>
-    <h2>
-      Edit event
-    </h2>
-  </header>
-
-  <form action="/modify_event/<%= @the_event.id %>"  method="post" >
-    <div>
-      <label for="event_name_box">
-        Event name
-      </label>
-
-      <input type="text" id="event_name_box" name="query_event_name" value="<%= @the_event.event_name %>">
-    </div>
-
-    <div>
-      <label for="event_location_box">
-        Event location
-      </label>
-
-      <input type="text" id="event_location_box" name="query_event_location" value="<%= @the_event.event_location %>">
-    </div>
-
-    <div>
-      <label for="event_date_box">
-        Event date
-      </label>
-
-      <input type="datetime-local" id="event_date_box" name="query_event_date"
-         value="<%= @the_event.event_date %>">
-    </div>
-
-    <div>
-      <label for="application_fee_box">
-        Application fee
-      </label>
-
-      <input type="text" id="application_fee_box" name="query_application_fee" value="<%= @the_event.application_fee %>">
-    </div>
-
-    <div>
-      <label for="participation_fee_box">
-        Participation fee
-      </label>
-
-      <input type="text" id="participation_fee_box" name="query_participation_fee" value="<%= @the_event.participation_fee %>">
-    </div>
-
-    <div>
-      <label for="event_duration_box">
-        Event duration
-      </label>
-
-      <input type="text" id="event_duration_box" name="query_event_duration" value="<%= @the_event.event_duration %>">
-    </div>
-
-    <div>
-      <label for="hourly_labor_box">
-        Hourly labor
-      </label>
-
-      <input type="text" id="hourly_labor_box" name="query_hourly_labor" value="<%= @the_event.hourly_labor %>">
-    </div>
-
-    <div>
-      <label for="mile_reimbursement_box">
-        Mile reimbursement
-      </label>
-
-      <input type="text" id="mile_reimbursement_box" name="query_mile_reimbursement" value="<%= @the_event.mile_reimbursement %>">
-    </div>
-
-    <div>
-      <label for="created_by_box">
-        Created by
-      </label>
-
-      <input type="text" id="created_by_box" name="query_created_by" value="<%= @the_event.created_by %>">
-    </div>
-
-    <button type="submit">
-      Update event
-    </button>
-  </form>
-</article>
+<h2>Event Details</h2>
+<p>
+  <strong>Date:</strong> <%= @the_event.event_date&.strftime("%B %d, %Y") %><br>
+  <strong>Location:</strong> <%= @the_event.event_site&.location_name %> (<%= @the_event.event_site&.location_distance %> miles)<br>
+  <strong>Duration:</strong> <%= @the_event.event_duration %> hours (+3 hrs setup = <%= @the_event.event_duration.to_i + 3 %> labor hours)
+</p>
 
 <hr>
+
+<h2>Onigiri for this Event</h2>
+
+<% if @the_event.onigiri_events.any? %>
+  <table border="1" cellpadding="8" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Flavor</th>
+        <th>Brought</th>
+        <th>Sold</th>
+        <th>Unit Cost</th>
+        <th>Unit Profit</th>
+        <th>Cost</th>
+        <th>Revenue</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @the_event.onigiri_events.each do |oe| %>
+        <tr>
+          <td><%= oe.onigiri.flavor %></td>
+          <td><%= oe.quantity_brought %></td>
+          <td><%= oe.quantity_sold %></td>
+          <td>$<%= sprintf("%.2f", oe.unit_cost) %></td>
+          <td>$<%= sprintf("%.2f", oe.unit_profit) %></td>
+          <td>$<%= sprintf("%.2f", oe.quantity_brought.to_f * oe.unit_cost.to_f) %></td>
+          <td>$<%= sprintf("%.2f", oe.quantity_sold.to_f * oe.unit_profit.to_f) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No onigiri added yet.</p>
+<% end %>
+
+<p><a href="/onigiri_events/new?event_id=<%= @the_event.id %>">+ Add Onigiri to this Event</a></p>
+
+<hr>
+
+<h2>Cost Breakdown</h2>
+
+<table border="1" cellpadding="8" cellspacing="0">
+  <tr>
+    <td>Application Fee</td>
+    <td>$<%= sprintf("%.2f", @the_event.application_fee.to_f) %></td>
+  </tr>
+  <tr>
+    <td>Participation Fee</td>
+    <td>$<%= sprintf("%.2f", @the_event.participation_fee.to_f) %></td>
+  </tr>
+  <tr>
+    <td>Labor (<%= @the_event.event_duration.to_i + 3 %> hrs × $<%= sprintf("%.2f", @the_event.hourly_labor.to_f) %>)</td>
+    <td>$<%= sprintf("%.2f", @the_event.total_labor_cost) %></td>
+  </tr>
+  <tr>
+    <td>Travel (<%= @the_event.event_site&.location_distance %> mi × $<%= sprintf("%.2f", @the_event.mile_reimbursement.to_f) %>)</td>
+    <td>$<%= sprintf("%.2f", @the_event.total_reimbursement) %></td>
+  </tr>
+  <tr>
+    <td>Onigiri Cost (<%= @the_event.total_onigiri_brought %> brought)</td>
+    <td>$<%= sprintf("%.2f", @the_event.total_onigiri_cost) %></td>
+  </tr>
+  <tr style="font-weight: bold; background-color: #f0f0f0;">
+    <td>TOTAL COST</td>
+    <td>$<%= sprintf("%.2f", @the_event.total_cost) %></td>
+  </tr>
+</table>
+
+<hr>
+
+<h2>Break-Even Analysis</h2>
+
+<div style="padding: 20px; background-color: #fffde7; border: 2px solid #ffc107; border-radius: 8px;">
+  <p style="font-size: 1.3em; margin: 0;">
+    🎯 <strong>You need to sell at least <%= @the_event.breakeven_quantity %> onigiri to break even.</strong>
+  </p>
+</div>
+
+<br>
+
+<h2>Profit Summary</h2>
+
+<table border="1" cellpadding="8" cellspacing="0">
+  <tr>
+    <td>Total Revenue</td>
+    <td>$<%= sprintf("%.2f", @the_event.total_revenue) %></td>
+  </tr>
+  <tr>
+    <td>Total Cost</td>
+    <td>$<%= sprintf("%.2f", @the_event.total_cost) %></td>
+  </tr>
+  <tr style="font-weight: bold; background-color: <%= @the_event.total_profit >= 0 ? '#e8f5e9' : '#ffebee' %>;">
+    <td>PROFIT / LOSS</td>
+    <td style="color: <%= @the_event.total_profit >= 0 ? 'green' : 'red' %>;">
+      <%= @the_event.total_profit >= 0 ? '+' : '' %>$<%= sprintf("%.2f", @the_event.total_profit) %>
+    </td>
+  </tr>
+</table>
+
+<hr>
+
+<h2>Edit Event</h2>
+
+<form action="/modify_event/<%= @the_event.id %>" method="post">
+  <div>
+    <label for="event_name_box">Event name</label>
+    <input type="text" id="event_name_box" name="query_event_name" value="<%= @the_event.event_name %>">
+  </div>
+  <div>
+    <label for="event_duration_box">Event duration (hours)</label>
+    <input type="number" id="event_duration_box" name="query_event_duration" value="<%= @the_event.event_duration %>">
+  </div>
+  <div>
+    <label for="application_fee_box">Application fee ($)</label>
+    <input type="number" step="0.01" id="application_fee_box" name="query_application_fee" value="<%= @the_event.application_fee %>">
+  </div>
+  <div>
+    <label for="participation_fee_box">Participation fee ($)</label>
+    <input type="number" step="0.01" id="participation_fee_box" name="query_participation_fee" value="<%= @the_event.participation_fee %>">
+  </div>
+  <button type="submit">Update Event</button>
+</form>
