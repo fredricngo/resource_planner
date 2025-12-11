@@ -7,6 +7,8 @@ class LocationsController < ApplicationController
     render({ :template => "location_templates/index" })
   end
 
+  
+
   def show
     the_id = params.fetch("path_id")
 

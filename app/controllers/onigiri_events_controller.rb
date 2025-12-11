@@ -7,6 +7,12 @@ class OnigiriEventsController < ApplicationController
     render({ :template => "onigiri_event_templates/index" })
   end
 
+  def new
+    @event = Event.where({ :id => params.fetch("event_id") }).at(0)
+    @list_of_onigiris = Onigiri.all
+    render({ :template => "onigiri_event_templates/new" })
+  end
+
   def show
     the_id = params.fetch("path_id")
 
@@ -25,12 +31,11 @@ class OnigiriEventsController < ApplicationController
     the_onigiri_event.unit_profit = params.fetch("query_unit_profit")
     the_onigiri_event.quantity_brought = params.fetch("query_quantity_brought")
     the_onigiri_event.quantity_sold = params.fetch("query_quantity_sold")
-
     if the_onigiri_event.valid?
       the_onigiri_event.save
-      redirect_to("/onigiri_events", { :notice => "Onigiri event created successfully." })
+      redirect_to("/events/#{the_onigiri_event.event_id}", { :notice => "Onigiri added successfully." })
     else
-      redirect_to("/onigiri_events", { :alert => the_onigiri_event.errors.full_messages.to_sentence })
+      redirect_to("/events/#{the_onigiri_event.event_id}", { :alert => the_onigiri_event.errors.full_messages.to_sentence })
     end
   end
 

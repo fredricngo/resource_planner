@@ -1,0 +1,41 @@
+<h1>Add Onigiri to <%= @event.event_name %></h1>
+
+<a href="/events/<%= @event.id %>">← Back to Event</a>
+
+<hr>
+
+<form action="/insert_onigiri_event" method="post">
+  <input type="hidden" name="query_event_id" value="<%= @event.id %>">
+
+  <div>
+    <label for="onigiri_id_box">Flavor</label>
+    <select id="onigiri_id_box" name="query_onigiri_id">
+      <option value="">-- Select Flavor --</option>
+      <% @list_of_onigiris.each do |o| %>
+        <option value="<%= o.id %>"><%= o.onigiri_flavor %></option>
+      <% end %>
+    </select>
+  </div>
+
+  <div>
+    <label for="unit_cost_box">Unit Cost ($)</label>
+    <input type="number" step="0.01" id="unit_cost_box" name="query_unit_cost" value="1.10">
+  </div>
+
+  <div>
+    <label for="unit_profit_box">Unit Profit ($)</label>
+    <input type="number" step="0.01" id="unit_profit_box" name="query_unit_profit" value="5.90">
+  </div>
+
+  <div>
+    <label for="quantity_brought_box">Quantity to Bring</label>
+    <input type="number" id="quantity_brought_box" name="query_quantity_brought" min="0">
+  </div>
+
+  <div>
+    <label for="quantity_sold_box">Quantity Sold (0 if planning)</label>
+    <input type="number" id="quantity_sold_box" name="query_quantity_sold" min="0" value="0">
+  </div>
+
+  <button type="submit">Add Onigiri</button>
+</form>

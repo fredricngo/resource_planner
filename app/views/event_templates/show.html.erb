@@ -37,7 +37,7 @@
     <tbody>
       <% @the_event.onigiri_events.each do |oe| %>
         <tr>
-          <td><%= oe.onigiri.flavor %></td>
+          <td><%= oe.onigiri.onigiri_flavor %></td>
           <td><%= oe.quantity_brought %></td>
           <td><%= oe.quantity_sold %></td>
           <td>$<%= sprintf("%.2f", oe.unit_cost) %></td>
@@ -60,11 +60,11 @@
 
 <table border="1" cellpadding="8" cellspacing="0">
   <tr>
-    <td>Application Fee</td>
+    <td>Application Fee ($)</td>
     <td>$<%= sprintf("%.2f", @the_event.application_fee.to_f) %></td>
   </tr>
   <tr>
-    <td>Participation Fee</td>
+    <td>Participation Fee ($) </td>
     <td>$<%= sprintf("%.2f", @the_event.participation_fee.to_f) %></td>
   </tr>
   <tr>
@@ -91,7 +91,7 @@
 
 <div style="padding: 20px; background-color: #fffde7; border: 2px solid #ffc107; border-radius: 8px;">
   <p style="font-size: 1.3em; margin: 0;">
-    🎯 <strong>You need to sell at least <%= @the_event.breakeven_quantity %> onigiri to break even.</strong>
+     <strong>You need to sell at least <%= @the_event.breakeven_quantity %> onigiri to break even.</strong>
   </p>
 </div>
 

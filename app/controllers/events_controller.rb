@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user!
   def index
     matching_events = Event.all
 
@@ -20,15 +21,14 @@ class EventsController < ApplicationController
   def create
     the_event = Event.new
     the_event.event_name = params.fetch("query_event_name")
-    the_event.event_location = params.fetch("query_event_location")
+    the_event.event_location = params.fetch("query_event_location")  
     the_event.event_date = params.fetch("query_event_date")
     the_event.application_fee = params.fetch("query_application_fee")
     the_event.participation_fee = params.fetch("query_participation_fee")
     the_event.event_duration = params.fetch("query_event_duration")
     the_event.hourly_labor = params.fetch("query_hourly_labor")
     the_event.mile_reimbursement = params.fetch("query_mile_reimbursement")
-    the_event.created_by = params.fetch("query_created_by")
-
+    the_event.created_by = current_user.id 
     if the_event.valid?
       the_event.save
       redirect_to("/events", { :notice => "Event created successfully." })

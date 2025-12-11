@@ -21,11 +21,13 @@
     </div>
 
     <div>
-      <label for="event_location_box">
-        Event location
-      </label>
-
-      <input type="text" id="event_location_box" name="query_event_location">
+      <label for="event_location_box">Location</label>
+      <select id="event_location_box" name="query_event_location">
+        <option value="">-- Select Location --</option>
+        <% Location.all.each do |loc| %>
+          <option value="<%= loc.id %>"><%= loc.location_name %> (<%= loc.location_distance %> mi)</option>
+        <% end %>
+      </select>
     </div>
 
     <div>
@@ -38,7 +40,7 @@
 
     <div>
       <label for="application_fee_box">
-        Application fee
+        Application fee (in $)
       </label>
 
       <input type="text" id="application_fee_box" name="query_application_fee">
@@ -46,7 +48,7 @@
 
     <div>
       <label for="participation_fee_box">
-        Participation fee
+        Participation fee (in $)
       </label>
 
       <input type="text" id="participation_fee_box" name="query_participation_fee">
@@ -54,7 +56,7 @@
 
     <div>
       <label for="event_duration_box">
-        Event duration
+        Event duration (hrs)
       </label>
 
       <input type="text" id="event_duration_box" name="query_event_duration">
@@ -70,18 +72,10 @@
 
     <div>
       <label for="mile_reimbursement_box">
-        Mile reimbursement
+        Mile reimbursement (miles)
       </label>
 
       <input type="text" id="mile_reimbursement_box" name="query_mile_reimbursement">
-    </div>
-
-    <div>
-      <label for="created_by_box">
-        Created by
-      </label>
-
-      <input type="text" id="created_by_box" name="query_created_by">
     </div>
 
     <button type="submit">

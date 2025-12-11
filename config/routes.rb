@@ -7,7 +7,10 @@ Rails.application.routes.draw do
   # READ
   get("/onigiri_events", { :controller => "onigiri_events", :action => "index" })
 
+  get("/onigiri_events/new", { :controller => "onigiri_events", :action => "new" })
+
   get("/onigiri_events/:path_id", { :controller => "onigiri_events", :action => "show" })
+
 
   # UPDATE
 
